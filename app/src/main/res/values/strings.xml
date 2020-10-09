@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">GitHub Viewer</string>
+    <string name="username">Username</string>
+    <string name="search">Search</string>
+    <string name="allowed_characters">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789</string>
+    <string name="error">Error</string>
+    <string name="error_username_blank">Write a username</string>
+    <string name="failure_message">A network error has occurred. Check your Internet connection and try again later.</string>
+    <string name="user_not_found">User not found. Please enter another name.</string>
 </resources>

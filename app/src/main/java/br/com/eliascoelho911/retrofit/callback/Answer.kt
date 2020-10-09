@@ -1,19 +1,22 @@
 package br.com.eliascoelho911.retrofit.callback
 
+import android.content.Context
+import br.com.eliascoelho911.R
+import org.koin.java.KoinJavaComponent.inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-private const val FAILURE_MESSAGE = "A network error has occurred. Check your Internet connection and try again later."
-private const val USER_NOT_FOUND = "User not found. Please enter another name."
 
 class Answer<T>(
     private val success: (T) -> Unit,
     private val failure: (error: String) -> Unit
 ) : Callback<T> {
 
+    private val context: Context by inject(Context::class.java)
+    private val failureMessage = context.getString(R.string.failure_message)
+
     override fun onFailure(call: Call<T>, t: Throwable) {
-        failure(FAILURE_MESSAGE)
+        failure(failureMessage)
     }
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
@@ -23,9 +26,10 @@ class Answer<T>(
             }
         } else {
             if (response.code() == 404) {
-                failure(USER_NOT_FOUND)
+                val userNotFound = context.getString(R.string.user_not_found)
+                failure(userNotFound)
             } else {
-                failure(FAILURE_MESSAGE)
+                failure(failureMessage)
             }
         }
     }
