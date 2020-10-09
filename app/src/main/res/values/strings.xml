@@ -7,4 +7,6 @@
     <string name="error_username_blank">Write a username</string>
     <string name="failure_message">A network error has occurred. Check your Internet connection and try again later.</string>
     <string name="user_not_found">User not found. Please enter another name.</string>
+    <string name="user_image">User Image</string>
+    <string name="user_container">User container</string>
 </resources>
