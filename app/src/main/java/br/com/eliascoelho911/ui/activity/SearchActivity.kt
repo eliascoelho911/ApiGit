@@ -1,4 +1,3 @@
-@file:Suppress("unused")
 
 package br.com.eliascoelho911.ui.activity
 
@@ -40,6 +39,7 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    @Suppress("unused")
     fun View.search() {
         this@SearchActivity.search()
     }
