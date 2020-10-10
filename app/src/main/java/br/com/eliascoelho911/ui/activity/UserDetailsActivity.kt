@@ -2,7 +2,10 @@ package br.com.eliascoelho911.ui.activity
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableField
 import br.com.eliascoelho911.R
@@ -17,6 +20,7 @@ import com.makeramen.roundedimageview.RoundedTransformationBuilder
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Transformation
 import kotlinx.android.synthetic.main.activity_user_details.*
+import kotlinx.android.synthetic.main.activity_user_details.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class UserDetailsActivity : AppCompatActivity() {
@@ -31,13 +35,24 @@ class UserDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        configureDataBinding()
+        val binding = configureDataBinding()
+        val toolbar = binding.root.activity_user_details_toolbar
+        configureToolbar(toolbar)
         findUser()
         findRepositories()
     }
 
-    private fun configureDataBinding() {
-        DataBindingUtil.setContentView<ActivityUserDetailsBinding>(
+    private fun configureToolbar(toolbar: Toolbar) {
+        setSupportActionBar(toolbar)
+        title = ""
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
+    }
+
+    private fun configureDataBinding() : ActivityUserDetailsBinding {
+        return DataBindingUtil.setContentView<ActivityUserDetailsBinding>(
             this,
             R.layout.activity_user_details
         ).apply { user = userObservable }
