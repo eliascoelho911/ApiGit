@@ -10,7 +10,6 @@ import br.com.eliascoelho911.R
 import br.com.eliascoelho911.databinding.ActivityUserDetailsBinding
 import br.com.eliascoelho911.extensions.showErrorDialog
 import br.com.eliascoelho911.extensions.showToast
-import br.com.eliascoelho911.model.Repository
 import br.com.eliascoelho911.model.User
 import br.com.eliascoelho911.ui.recyclerview.adapter.RepositoriesAdapter
 import br.com.eliascoelho911.ui.viewmodel.UserDetailsViewModel
@@ -36,8 +35,28 @@ class UserDetailsActivity : AppCompatActivity() {
         val binding = configureDataBinding()
         val toolbar = binding.root.activity_user_details_toolbar
         configureToolbar(toolbar)
-        findUser()
-        findRepositories()
+        findUsername()
+    }
+
+    private fun findUsername() {
+        if (intent.hasExtra(KEY_USERNAME)) {
+            val username = intent.getStringExtra(KEY_USERNAME)
+            if (username == null) {
+                showToast(getString(R.string.error_finding_username))
+            } else {
+                findRepositories(username)
+                getUser(username)
+            }
+        }
+    }
+
+    private fun getUser(username: String) {
+        viewModel.getUser(username, success = { user ->
+            userObservable.set(user)
+            setUserImage(user)
+        }, failure = {
+            showErrorDialog(it)
+        })
     }
 
     private fun configureToolbar(toolbar: Toolbar) {
@@ -49,37 +68,19 @@ class UserDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun configureDataBinding() : ActivityUserDetailsBinding {
+    private fun configureDataBinding(): ActivityUserDetailsBinding {
         return DataBindingUtil.setContentView<ActivityUserDetailsBinding>(
             this,
             R.layout.activity_user_details
         ).apply { user = userObservable }
     }
 
-    private fun findRepositories() {
-        if (intent.hasExtra(KEY_REPOSITORIES)) {
-            @Suppress("UNCHECKED_CAST")
-            val repositoriesReturn =
-                intent.getSerializableExtra(KEY_REPOSITORIES) as Array<Repository>
-            val repositories = repositoriesReturn.toList()
-            repositoriesList.adapter = RepositoriesAdapter(repositories)
-        }
-    }
-
-    private fun findUser() {
-        if (intent.hasExtra(KEY_USERNAME)) {
-            val username = intent.getStringExtra(KEY_USERNAME)
-            if (username == null) {
-                showToast(getString(R.string.error_finding_username))
-            } else {
-                viewModel.getUser(username, success = { user ->
-                    userObservable.set(user)
-                    setUserImage(user)
-                }, failure = {
-                    showErrorDialog(it)
-                })
-            }
-        }
+    private fun findRepositories(username: String) {
+        viewModel.getRepositories(username, success = {
+            repositoriesList.adapter = RepositoriesAdapter(it)
+        }, failure = {
+            showErrorDialog(it)
+        })
     }
 
     private fun setUserImage(user: User) {
