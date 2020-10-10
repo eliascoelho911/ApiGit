@@ -1,5 +1,6 @@
 package br.com.eliascoelho911.ui.activity
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -55,7 +56,9 @@ class UserDetailsActivity : AppCompatActivity() {
             userObservable.set(user)
             setUserImage(user)
         }, failure = {
-            showErrorDialog(it)
+            showErrorDialog(it) { _, _ ->
+                finish()
+            }
         })
     }
 
