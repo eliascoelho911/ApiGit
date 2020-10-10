@@ -2,7 +2,6 @@ package br.com.eliascoelho911.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import br.com.eliascoelho911.model.Repository
-import br.com.eliascoelho911.model.User
 import br.com.eliascoelho911.repository.GitRepository
 import org.koin.java.KoinJavaComponent.inject
 

@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package br.com.eliascoelho911
 
 import android.app.Application

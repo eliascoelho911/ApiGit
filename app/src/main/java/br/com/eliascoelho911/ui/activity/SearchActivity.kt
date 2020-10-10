@@ -1,9 +1,10 @@
+@file:Suppress("unused")
+
 package br.com.eliascoelho911.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import br.com.eliascoelho911.R
 import br.com.eliascoelho911.extensions.showErrorDialog
@@ -26,7 +27,7 @@ class SearchActivity : AppCompatActivity() {
         setSupportActionBar(activity_search_toolbar)
     }
 
-    fun View.search() {
+    private fun search() {
         val username = usernameEditText.text.toString()
         if (username.isBlank()) {
             showToast(getString(R.string.error_username_blank))
@@ -37,6 +38,10 @@ class SearchActivity : AppCompatActivity() {
                 showErrorDialog(it)
             })
         }
+    }
+
+    fun View.search() {
+        this@SearchActivity.search()
     }
 
     private fun goToUserDetailsActivity(repositories: List<Repository>, username: String) {

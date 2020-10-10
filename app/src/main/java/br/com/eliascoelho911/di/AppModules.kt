@@ -8,14 +8,14 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val retrofitModule = module {
-    single<GitRetrofit> { GitRetrofit() }
+    single { GitRetrofit() }
 }
 
 val repositoryModule = module {
-    single<GitRepository> { GitRepository() }
+    single { GitRepository() }
 }
 
 val viewModelModule = module {
-    viewModel<SearchViewModel> { SearchViewModel() }
-    viewModel<UserDetailsViewModel> { UserDetailsViewModel() }
+    viewModel { SearchViewModel() }
+    viewModel { UserDetailsViewModel() }
 }

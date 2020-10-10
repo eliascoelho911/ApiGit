@@ -14,7 +14,7 @@ class GitRetrofit {
     val service: GitService
 
     init {
-        val client = configuraClient()
+        val client = configureClient()
         retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -23,7 +23,7 @@ class GitRetrofit {
         service = retrofit.create(GitService::class.java)
     }
 
-    private fun configuraClient(): OkHttpClient {
+    private fun configureClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.level = BODY
         return OkHttpClient.Builder()
