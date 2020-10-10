@@ -7,7 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val BASE_URL = "https://api.github.com/users/"
+private const val BASE_URL = "https://api.github.com/"
 
 class GitRetrofit {
     private val retrofit: Retrofit

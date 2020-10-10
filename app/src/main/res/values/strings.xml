@@ -9,4 +9,5 @@
     <string name="user_not_found">User not found. Please enter another name.</string>
     <string name="user_image">User Image</string>
     <string name="user_container">User container</string>
+    <string name="error_finding_username">Error finding username</string>
 </resources>
