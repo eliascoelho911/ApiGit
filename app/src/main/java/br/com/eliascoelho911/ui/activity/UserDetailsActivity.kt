@@ -60,6 +60,7 @@ class UserDetailsActivity : AppCompatActivity() {
 
     private fun findRepositories() {
         if (intent.hasExtra(KEY_REPOSITORIES)) {
+            @Suppress("UNCHECKED_CAST")
             val repositoriesReturn =
                 intent.getSerializableExtra(KEY_REPOSITORIES) as Array<Repository>
             val repositories = repositoriesReturn.toList()
